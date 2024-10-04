@@ -54,7 +54,7 @@ nav{
     color: white;
     padding: 4px;
     font-size: 18px;
-    font-family: poppins;
+    font-family: 'Judson';
 }
 
 .nav-items a:hover{
@@ -171,4 +171,15 @@ nav{
 #Signup:hover{
     background-color: #9500FF;
     color: white;
+}
+#demoImg{
+    width: 100%;
+    background-color: black;
+}
+
+#feedback_heading{
+    margin: 48px 64px;
+    color: #9500ff;
+    font-size: 40px;
+    font-family: 'Judson';
 }
