@@ -2,18 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: black;
 };
 
 body{
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     position: absolute;
+    background-color: black;
 }
 
 nav{
     width: 100%;
     height: 100px;
+    background-color: black;
     display: flex;
     justify-content: space-between;
     padding-top: 40px;
@@ -97,10 +98,15 @@ nav{
     background-color: #9500FF;
 }
 
+#Home{
+    padding-top: 85px;
+    background-color: black;
+}
+
 .heading{
     width: 1116px;
     height: 150px;
-    margin-top: 85px;
+    /* margin-top: 85px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -137,7 +143,7 @@ nav{
     margin-top: 42px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 42px;
+    /* margin-bottom: 42px; */
     width: 159px;
     height: 40px;
     display: flex;
@@ -172,14 +178,89 @@ nav{
     background-color: #9500FF;
     color: white;
 }
+#image-container{
+    background-color: black;
+    display: flex;
+}
 #demoImg{
+    margin: auto;
+    width: 80%;
+    padding-top: 42px;
+    padding-bottom: 42px;
+    margin-bottom: 0%;
+}
+
+#Feedbacks{
     width: 100%;
+    height: 575px;
+    padding-top: 48px;
     background-color: black;
 }
 
 #feedback_heading{
-    margin: 48px 64px;
+    margin: 0 64px 48px 64px;
     color: #9500ff;
     font-size: 40px;
     font-family: 'Judson';
+}
+
+#feedbacks{
+    display: grid;
+    margin: 0px 64px 48px 64px;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
+    row-gap: 48px;
+    column-gap: 48px;
+}
+
+#card-feedback{
+    height: 147px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 7px;
+}
+
+#detail-feedback{
+    margin: 8px;
+    color: black;
+    font-family: 'poppins';
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#img-feedback{
+    width: 60px;
+    height: 6%;
+    border: 1px solid white;
+    border-radius: 50px;
+}
+
+#feedback-footer{
+    display: flex;
+    margin: 12px;
+    gap: 15px;
+}
+#feedback-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#name-feedback{
+    font-family: 'poppins';
+    font-weight: 450;
+}
+
+#date-feedback{
+    font-family: 'poppins';
+    font-weight: 400;
+}
+
+#FAQs{
+    background-color: black;
+    padding-top: 48px;
+}
+
+#heading-faqs{
+    color: white;
 }
