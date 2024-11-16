@@ -21,7 +21,7 @@ body {
     /* margin-top: 20px; */
     font-size: 2rem;
     color: #ffffff;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .signup_design 
@@ -31,7 +31,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 320px; 
-    height: 450px;
+    height: 460px;
     background-color: rgba(0, 0, 0, 0.6);
     border: 2px solid #b303ff;
     border-radius: 10px;
@@ -43,7 +43,7 @@ body {
 
 .signup_design h3 {
     font-size: 1.5rem;
-    margin-bottom: 45px;
+    margin-bottom: 22px;
     color: white;
 }
 .sign{
@@ -53,10 +53,10 @@ body {
 .description {
     font-size: 0.9rem;
     color: white;
-    margin: 20px;
+    margin: 10px;
 }
 
-input[type="email"], input[type="password"] {
+input[type="text"], input[type="password"] {
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
@@ -103,8 +103,7 @@ input[type="text"] {
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 28px;
 }
 
 
