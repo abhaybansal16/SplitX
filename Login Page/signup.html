@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplitX Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h1 id="logo">SplitX</h1>
+        </nav>
+        <div class="signup_design">
+            <h3>Sign up with email</h3>
+            <p class="description">Manage your expenses, track your debit balances, and stay in control of your finances effortlessly with SplitX.</p>
+            
+            <section class="part1">
+                <form id="signupForm">
+                    <div class="signup_page" id="emailid">
+                        <input type="email" placeholder="Email" id="emailInput" required>
+                    </div>
+                    <div class="signup_page" id="password">
+                        <div class="password-container">
+                            <input type="password" placeholder="Password" id="passInput" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="signup_page" id="confirm_password">
+                        <div class="password-container">
+                            <input type="password" placeholder="Confirm Password" id="confirmPassInput" required>
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="signup_page" id="signup">
+                        <input type="submit" value="Sign Up" id="signup_Btn">
+                    </div>
+                    <p id="errorMessage" style="color: red; display: none;"></p>
+                </form>
+            </section>
+        
+        </div>
+    </div>
+    <script>
+        // Toggle visibility for Password field
+        document.getElementById("togglePassword").addEventListener("click", function() {
+            const passInput = document.getElementById("passInput");
+            const icon = this.querySelector(".material-symbols-outlined");
+            if (passInput.type === "password") {
+                passInput.type = "text";
+                icon.textContent = "visibility_off";
+            } else {
+                passInput.type = "password";
+                icon.textContent = "visibility";
+            }
+        });
+
+        // Toggle visibility for Confirm Password field
+        document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
+            const confirmPassInput = document.getElementById("confirmPassInput");
+            const icon = this.querySelector(".material-symbols-outlined");
+            if (confirmPassInput.type === "password") {
+                confirmPassInput.type = "text";
+                icon.textContent = "visibility_off";
+            } else {
+                confirmPassInput.type = "password";
+                icon.textContent = "visibility";
+            }
+        });
+
+        // Form validation
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById("emailInput").value;
+            const passInput = document.getElementById("passInput").value;
+            const confirmPassInput = document.getElementById("confirmPassInput").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Regular expression for simple email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(emailInput)) {
+                errorMessage.textContent = "Please enter a valid email address.";
+                errorMessage.style.display = "block";
+                return;
+            }
+            
+            if (passInput.length < 6) {
+                errorMessage.textContent = "Password must be at least 6 characters long.";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            if (passInput !== confirmPassInput) {
+                errorMessage.textContent = "Passwords do not match.";
+                errorMessage.style.display = "block";
+                return;
+            }
+
+            errorMessage.style.display = "none";
+            alert("Form submitted successfully!");
+            // Form submission logic here (e.g., sending data to server)
+        });
+    </script>
+</body>
+</html>
