@@ -17,33 +17,31 @@
     <button type="submit">Submit</button>   
 </form>
 <?php
+session_start();
    if($_SERVER["REQUEST_METHOD"]=="POST"){
     $User = $_POST['user'];
     $groupName = $_POST['gpname'];
     $amount=$_POST["amount"];
     if(empty($groupName)||empty($amount) ||empty($User)){
-        header("Location: ../dashboard.php");
+        header("Location: ../splitX/dashboard.php");
     }
     $dsn="mysql:host=127.0.0.1:3307;dbname=splitx";
     $dbus="root";
     $dbpass="";
     $pdo=new PDO($dsn,$dbus,$dbpass);
-    $query = "SELECT group_id FROM groups WHERE gname = :gpname";
+    $query = "SELECT group_id FROM groups WHERE gname = '$groupName'";
     $stmt=$pdo->prepare($query);
-    $stmt->bindParam(':gpname', $groupName, PDO::PARAM_STR);
     $stmt->execute();
     $result=$stmt->fetch(PDO::FETCH_ASSOC);
     if($result){
         $groupid=$result['group_id'];
-    $query1 = "SELECT id FROM users WHERE username = :user";
+    $query1 = "SELECT id FROM users WHERE username = '$User'";
     $stmt1=$pdo->prepare($query1);
-    $stmt1->bindParam(':user', $User, PDO::PARAM_STR);
     $stmt1->execute();
     $result1=$stmt1->fetch(PDO::FETCH_ASSOC);
     if($result1){
-        // $userId=$result1['id'];
-        $userId=1;
-        $q = "INSERT INTO expense (user_id,gid, amount) VALUES (:user_id,:gid, :amount)";
+        $userId=$result1['id'];
+        $q = "INSERT INTO expense1 (user_id,gid, amount) VALUES (:user_id,:gid, :amount)";
 
     // Prepare the statement
     $s = $pdo->prepare($q);
@@ -53,9 +51,11 @@
     $s->bindParam(':gid', $groupid, PDO::PARAM_INT);
     $s->bindParam(':amount', $amount, PDO::PARAM_STR); // Use PARAM_STR for monetary values
 
+    
     // Execute the query
     $s->execute();
-    echo "Success";
+    include 'split_expense.php';
+    echo "expense added successfully";
     // header("Location: ../splitX/dashboard.php");
     }
 }
