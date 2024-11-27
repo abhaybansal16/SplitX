@@ -78,7 +78,7 @@
   border: transparent;
 }
 .active{
-  color: #fff;
+  text-decoration: #fff;
 }
 .passive:hover{
   background-color: black;
@@ -87,6 +87,9 @@
   border-radius: 5px;
   color: #fff;
   margin-bottom: 30px;
+}
+.passive a{
+  color: black;
 }
 .passive:hover a{
   color:#fff;
@@ -104,7 +107,7 @@
   border: 0;
   margin-left: 20px;
   position: relative;
-  color: white;
+  color: black;
 }
 body{
   margin: 0;
@@ -138,6 +141,12 @@ body{
   color: black;
   transition: ease-in-out 0.3s;
 }
+.active a{
+  color: #fff;
+}
+.active:hover a{
+  color: white;
+}
 .active_logo{
   background: linear-gradient(90deg, #9500FF 34%, #6200FF 50%, #2600FF 69%);
   padding: 5px;
@@ -165,6 +174,7 @@ body{
   display: flex;
   justify-content: center;
   flex-direction: column;
+  /* gap: 20px; */
 }
 .container{
   position: relative;
@@ -193,6 +203,7 @@ color: transparent;
   background: linear-gradient(90deg, #9500FF 34%, #6200FF 50%, #2600FF 69%);
   background-clip: text;
   color: transparent;
+  /* margin-right: 20px; */
   /* backdrop-filter: blur(4px);  */
 }
 .hbar{
@@ -215,8 +226,11 @@ align-self: center;
 .heading-container{
   display: flex;
   align-items: center;
-  justify-content: center;
   text-align: center;
   /* flex-direction: row; */
-  padding: auto;
+  /* gap: 20px; */
+}
+.group{
+  background-color: #fff;
+  color: black;
 }
