@@ -1,3 +1,42 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST["name"];
+    $password = $_POST["password"];
+    $phone = $_POST["phone"];
+    $confirmPassword = $_POST["confirm_password"];
+
+    // Validate input fields
+    if (empty($username) || empty($password) || empty($phone) || empty($confirmPassword)) {
+        echo "<script>alert('All fields are required!'); window.location.href='signup.php';</script>";
+        exit();
+    }
+
+    if ($password !== $confirmPassword) {
+        echo "<script>alert('Passwords do not match!'); window.location.href='signup.php';</script>";
+        exit();
+    }
+
+    try {
+        // Database connection
+        $dsn = "mysql:host=127.0.0.1:3307;dbname=splitx";
+        $dbus = "root";
+        $dbpass = "";
+        $pdo = new PDO($dsn, $dbus, $dbpass);
+
+        // Insert user data into the database
+        $query = "INSERT INTO users (username, pass, phone) VALUES (?, ?, ?)";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$username, $password, $phone]);
+
+        // Redirect to the login page with an alert
+        echo "<script>alert('Signup successful! Redirecting to login.'); window.location.href='login.php';</script>";
+        exit();
+    } catch (PDOException $e) {
+        echo "<script>alert('Database error: " . $e->getMessage() . "'); window.location.href='signup.php';</script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,43 +52,54 @@
             <h1 id="logo">SplitX</h1>
         </nav>
         <div class="signup_design">
-            <h3>Sign in</h3>
-            <p class="description">Manage your expenses, track your debit balances, and stay in control of your finances effortlessly with SplitX.</p>
+            <h3>Sign Up</h3>
+            <p class="description">Join SplitX and manage your finances easily.</p>
             
             <section class="part1">
-                <form id="signupForm" action = "sign.php" method="POST">
-                    <div class="signup_page" id="name">
-                        <input type="text" placeholder="Name" id="name" required>
+                <form id="signupForm" method="POST" action="signup.php">
+                    <!-- Username Field -->
+                    <div class="signup_page" id="username">
+                        <input type="text" name="name" placeholder="Username" id="usernameInput" required>
                     </div>
-                    <div class="signup_page" id="phone">
-                        <input type="text" placeholder="Phone" id="phone" required>
-                    </div>
+
+                    <!-- Password Field -->
                     <div class="signup_page" id="password">
                         <div class="password-container">
-                            <input type="password" placeholder="Password" id="passInput" required>
+                            <input type="password" name="password" placeholder="Password" id="passInput" required>
                             <button type="button" class="toggle-password" id="togglePassword">
                                 <span class="material-symbols-outlined">visibility</span>
                             </button>
                         </div>
                     </div>
+
+                    <!-- Confirm Password Field -->
                     <div class="signup_page" id="confirm_password">
                         <div class="password-container">
-                            <input type="password" placeholder="Confirm Password" id="confirmPassInput" required>
+                            <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirmPassInput" required>
                             <button type="button" class="toggle-password" id="toggleConfirmPassword">
                                 <span class="material-symbols-outlined">visibility</span>
                             </button>
                         </div>
                     </div>
-                    <!-- <div class="signup_page" id="signup"> -->
+                    
+                    <!-- Phone Number Field -->
+                    <div class="signup_page" id="phone">
+                        <input type="tel" name="phone" placeholder="Phone Number" id="phoneInput" pattern="[0-9]{10}" required>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="signup_page" id="signup">
                         <input type="submit" value="Sign Up" id="signup_Btn">
-                    <!-- <p id="errorMessage" style="color: red; display: none;"></p> -->
+                    </div>
                 </form>
+                <!-- Redirect to Login -->
+                <p class="redirect">
+                    Already signed up? <a href="login.php">Log in</a>.
+                </p>
             </section>
-        
         </div>
     </div>
     <script>
-        // Toggle visibility for Password field
         document.getElementById("togglePassword").addEventListener("click", function() {
             const passInput = document.getElementById("passInput");
             const icon = this.querySelector(".material-symbols-outlined");
@@ -62,7 +112,6 @@
             }
         });
 
-        // Toggle visibility for Confirm Password field
         document.getElementById("toggleConfirmPassword").addEventListener("click", function() {
             const confirmPassInput = document.getElementById("confirmPassInput");
             const icon = this.querySelector(".material-symbols-outlined");
@@ -74,40 +123,7 @@
                 icon.textContent = "visibility";
             }
         });
-
-        // Form validation
-        document.getElementById("signupForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const emailInput = document.getElementById("emailInput").value;
-            const passInput = document.getElementById("passInput").value;
-            const confirmPassInput = document.getElementById("confirmPassInput").value;
-            const errorMessage = document.getElementById("errorMessage");
-
-            // Regular expression for simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (!emailRegex.test(emailInput)) {
-                errorMessage.textContent = "Please enter a valid email address.";
-                errorMessage.style.display = "block";
-                return;
-            }
-            
-            if (passInput.length < 6) {
-                errorMessage.textContent = "Password must be at least 6 characters long.";
-                errorMessage.style.display = "block";
-                return;
-            }
-
-            if (passInput !== confirmPassInput) {
-                errorMessage.textContent = "Passwords do not match.";
-                errorMessage.style.display = "block";
-                return;
-            }
-
-            errorMessage.style.display = "none";
-            alert("Form submitted successfully!");
-            // Form submission logic here (e.g., sending data to server)
-        });
     </script>
 </body>
 </html>
+
