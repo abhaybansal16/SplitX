@@ -60,7 +60,7 @@ function toggleWidth() {
                 <div class="logo passive"><span class="material-symbols-outlined">vital_signs</span><a
                         href="activity.php" id="text" class="hidden-text">Activity</a></div>
                 <div class="hbar"></div>
-                <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.html"
+                <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.php"
                         id="text" class="hidden-text">Settings</a></div>
                 <div class="hbar"></div>
             </div>
@@ -80,40 +80,135 @@ function toggleWidth() {
                 $pdo = new PDO($dsn, $dbus, $dbpass);
             if (isset($_SESSION['user_id'])) {
             echo "<h2>"."Hello, " . htmlspecialchars($_SESSION['username']) . "!"."</h2>";
-            $userID = $_SESSION['user_id'];
+            $loggedInUserId = $_SESSION['user_id'];
             }
             ?>
           </div>
           <?php
-            $qBalance = "SELECT * FROM balance WHERE uid = $userID";
-            $stmtBalance = $pdo->prepare($qBalance);
-            $stmtBalance->execute();
+                  $qOwed = "
+                  SELECT SUM(e.amount / (gm.member_count)) AS total_owed
+                  FROM expense1 e
+                  JOIN (
+                      SELECT gid, COUNT(user_id) AS member_count
+                      FROM group_mem
+                      GROUP BY gid
+                  ) gm ON e.gid = gm.gid
+                  WHERE e.user_id != :user_id
+                    AND EXISTS (
+                        SELECT 1
+                        FROM group_mem
+                        WHERE gid = e.gid AND user_id = :user_id
+                    )
+              ";
+              $qPaid = "
+                    SELECT SUM(e.amount / (gm.member_count - 1)) AS total_paid
+                    FROM expense1 e
+                    JOIN (
+                        SELECT gid, COUNT(user_id) AS member_count
+                        FROM group_mem
+                        GROUP BY gid
+                        ) gm ON e.gid = gm.gid
+                    WHERE e.user_id = :user_id
+                    ";
+
+            $stmtOwed = $pdo->prepare($qOwed);
+            $stmtOwed->execute([':user_id' => $loggedInUserId]);
+
+            $stmtPaid = $pdo->prepare($qPaid);
+            $stmtPaid->execute([':user_id' => $loggedInUserId]);
             
-            $balanceResult = $stmtBalance->fetchAll(PDO::FETCH_ASSOC);
+            $paidResult = $stmtPaid->fetch(PDO::FETCH_ASSOC);
+            $owedResult = $stmtOwed->fetch(PDO::FETCH_ASSOC);
             
-            if (empty($balanceResult)) {
-                echo "You don't owe anything at the moment.";
-            } else {
+            $totalOwed = $owedResult['total_owed'] ?? 0;
+            $totalPaid = $paidResult['total_paid'] ?? 0;
+            
+            $netOwed = $totalOwed - $totalPaid;    
+              // Check if the user owes anything
+              if ($netOwed==0) {
+                  echo "You don't owe anything at the moment.";
+              } else if($netOwed>0){
+                  // Display the total amount owed
+                    echo "<table border='1'>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    //echo "<th>User ID</th>";
+                    echo "<th>Total Owed</th>";
+                    echo "<th>Total Paid</th>";
+                    echo "<th>Net Amount Owed</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+
+                    echo "<tr>";
+                    //echo "<td>" . htmlspecialchars($loggedInUserId) . "</td>";
+                    echo "<td>" . htmlspecialchars(number_format($totalOwed, 2)) . "</td>";
+                    echo "<td>" . htmlspecialchars(number_format($totalPaid, 2)) . "</td>";
+                    echo "<td>" . htmlspecialchars(number_format($netOwed, 2)) . "</td>";
+                    echo "</tr>";
+
+                    echo "</tbody>";
+                    echo "</table>";
+              }
+              else{
+                    $netOwed=$totalPaid-$totalOwed;
+                     // Display the total amount owed
+                     echo "<table border='1'>";
+                     echo "<thead>";
+                     echo "<tr>";
+                     echo "<th>Total Owed</th>";
+                     echo "<th>Total Paid</th>";
+                     echo "<th>Net Amount Owed to you</th>";
+                     echo "</tr>";
+                     echo "</thead>";
+                     echo "<tbody>";
+ 
+                     echo "<tr>";
+                     echo "<td>" . htmlspecialchars(number_format($totalOwed, 2)) . "</td>";
+                     echo "<td>" . htmlspecialchars(number_format($totalPaid, 2)) . "</td>";
+                     echo "<td>" . htmlspecialchars(number_format($netOwed, 2)) . "</td>";
+                     echo "</tr>";
+                     echo "</tbody>";
+                     echo "</table>";
+            }
+            echo "<h2>Groups You are in</h2>"."<br>";
+            $query = "
+            SELECT g.group_id, g.gname
+            FROM group_mem gm
+            JOIN groups g ON gm.gid = g.group_id
+            WHERE gm.user_id = :user_id
+            ";
+
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':user_id' => $loggedInUserId]);
+            $groups = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Display the groups in a table
+            if (empty($groups)) {
+                echo "<p>You are not a member of any groups.</p>";
+            } 
+            else {
                 echo "<table border='1'>";
                 echo "<thead>";
                 echo "<tr>";
-                echo "<th>Owed To (User ID)</th>";
-                echo "<th>Amount Owed</th>";
+                echo "<th>Group ID</th>";
+                echo "<th>Group Name</th>";
                 echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
-                
-                foreach ($balanceResult as $row) {
+            
+                foreach ($groups as $group) {
                     echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row["owed_to"]) . "</td>";
-                    echo "<td>" . htmlspecialchars($row["amount"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($group['group_id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($group['gname']) . "</td>";
                     echo "</tr>";
                 }
-                
+
                 echo "</tbody>";
                 echo "</table>";
             }
           ?>
+      </div>
     </div>
 </body>
 
