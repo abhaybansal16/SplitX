@@ -60,7 +60,7 @@ function toggleWidth() {
                 <div class="logo passive"><span class="material-symbols-outlined">vital_signs</span><a
                         href="activity.php" id="text" class="hidden-text">Activity</a></div>
                 <div class="hbar"></div>
-                <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.html"
+                <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.php"
                         id="text" class="hidden-text">Settings</a></div>
                 <div class="hbar"></div>
             </div>
@@ -69,6 +69,7 @@ function toggleWidth() {
           <div class="heading-container">
             <h1 class="heading">Groups</h1>
             <button class="expense_button" onclick="window.location.href='addgc.php'">Add Group</button>
+            <button class="expense_button" onclick="window.location.href='addgcmem.php'">Add Group Member</button>
           </div>
           <?php
                 $dsn="mysql:host=127.0.0.1:3307;dbname=splitx";
