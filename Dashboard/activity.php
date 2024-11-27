@@ -60,7 +60,7 @@ function toggleWidth() {
                 <div class="logo active_logo"><span class="material-symbols-outlined">vital_signs</span><a
                         href="#" id="text" class="hidden-text active">Activity</a></div>
                 <div class="hbar"></div>
-                <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.html"
+                <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.php"
                         id="text" class="hidden-text">Settings</a></div>
                 <div class="hbar"></div>
             </div>
@@ -75,15 +75,19 @@ function toggleWidth() {
                     $dbpass = "";
                     $pdo = new PDO($dsn, $dbus, $dbpass);
         
+                    // Query to select data from the expense1 table
                     $q2 = "SELECT * FROM expense1;";
                     $stmt2 = $pdo->prepare($q2);
                     $stmt2->execute();
         
+                    // Fetch all the results
                     $result = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         
+                    // Check if there are results
                     if (empty($result)) {
                         echo "No expenses found";
                     } else {
+                        // Create the HTML table structure
                         echo "<table border='1'>";
                         echo "<thead>";
                         echo "<tr>";
@@ -94,6 +98,7 @@ function toggleWidth() {
                         echo "</thead>";
                         echo "<tbody>";
             
+                        // Loop through the results and display them in table rows
                         foreach ($result as $r) {
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($r["gid"]) . "</td>";
