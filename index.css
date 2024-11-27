@@ -10,6 +10,12 @@ body{
     position: absolute;
     background-color: black;
 }
+nav2{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+}
 
 nav{
     width: 100%;
@@ -68,14 +74,8 @@ nav{
     border: 2px solid #9500ff;
     border-radius: 7px;
 }
-#products{
-    width: 99px;
-    height: 32px;
-    border: 2px;
-    border-radius: 7px;
-}
 #about{
-    width: 84px;
+    width: 94px;
     height: 32px;
 }
 #feedback{
@@ -84,12 +84,12 @@ nav{
 }
 #sign-in{
     margin-top: 10px;
-    width: 158px;
+    width: 79px;
     height: 32px;
     color: #9500FF;
     border: 2px solid #9500ff;
     border-radius: 7px;
-    padding: 4px;
+    /* padding: 4px; */
     background-color: black;
 }
 
@@ -104,6 +104,7 @@ nav{
 }
 
 .heading{
+    margin-top: 40px;
     width: 1116px;
     height: 150px;
     /* margin-top: 85px; */
@@ -140,33 +141,35 @@ nav{
 }
 
 #log-In{
-    margin-top: 42px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 75px;
+    margin-left: 40%;
     /* margin-bottom: 42px; */
-    width: 159px;
-    height: 40px;
+    width: 400px;
+    height: 60px;
     display: flex;
     gap: 16px;
 }
 
 #Login{
-    width: 77px;
-    height: 40px;
+    width: 150px;
+    height: 60px;
     padding: 12px;
     background-color: #9500ff;
     border: 2px solid #9500FF;
     border-radius: 8px;
     color: white;
+    font-size: medium;
 }
 
 #Signup{
-    width: 77px;
-    height: 40px;
+    width: 150px;
+    height: 60px;
     padding: 12px;
     border: 2px solid #9500ff;
     border-radius: 8px;
     color: #9500ff;
+    background-color: black;
+    font-size: medium;
 }
 
 #Login:hover{
@@ -183,17 +186,20 @@ nav{
     display: flex;
 }
 #demoImg{
-    margin: auto;
-    width: 80%;
-    padding-top: 42px;
-    padding-bottom: 42px;
+    margin-top: -4px;
+    width: 100%;
     margin-bottom: 0%;
+    padding-top: -3px;
 }
-
+#user{
+    width: 100%;
+    height: 1100px;
+}
 #Feedbacks{
     width: 100%;
     height: 575px;
-    padding-top: 48px;
+    /* padding-top: 35px; */
+    margin-top: 0;
     background-color: black;
 }
 
@@ -263,4 +269,10 @@ nav{
 
 #heading-faqs{
     color: white;
+}
+#Home{
+    height: 900px;
+}
+html {
+    scroll-behavior: smooth;
 }
