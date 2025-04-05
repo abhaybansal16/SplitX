@@ -39,11 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 <html>
-    <head>
+
+<head>
     <title>Settings</title>
-    </head>
-    <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet"
+</head>
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <script>
 function toggleWidth() {
@@ -68,9 +69,9 @@ function toggleWidth() {
     }
 }
 </script>
- 
-<body> 
-    <div class="container"> 
+
+<body>
+    <div class="container">
         <div id="sidebar" class="sidebar">
             <div class="nav">
                 <div class="logo1">
@@ -87,8 +88,8 @@ function toggleWidth() {
             </div>
             <br>
             <div class="logos">
-                <div class="logo passive"><span class="material-symbols-outlined">dashboard</span><a href="dashboard.php"
-                        id="text" class="hidden-text ">Dashboard</a></div>
+                <div class="logo passive"><span class="material-symbols-outlined">dashboard</span><a
+                        href="dashboard.php" id="text" class="hidden-text ">Dashboard</a></div>
                 <div class="hbar"></div>
                 <div class="logo passive"><span class="material-symbols-outlined">groups</span><a href="group.php"
                         id="text" class="hidden-text">Group</a></div>
@@ -102,21 +103,22 @@ function toggleWidth() {
             </div>
         </div>
         <div class="body" id="body1">
-          <div class="heading-container">
-            <h1 class="heading">Settings</h1>
+            <div class="heading-container">
+                <h1 class="heading">Settings</h1>
             </div>
-          <div> 
-            <form method="POST" action="settings.php">
-            <label for="new_password">New Password:</label>
-            <input type="password" id="new_password" name="new_password" required><br><br>
+            <div>
+                <form method="POST" action="settings.php">
+                    <label for="new_password">New Password:</label>
+                    <input type="password" id="new_password" name="new_password" required><br><br>
 
-            <label for="confirm_password">Confirm New Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-            <button type="submit">Update Password</button>
-            </form>
-            <br>
-            <button class="expense_button" onclick="window.location.href='logout.php'">Logout</button>
+                    <label for="confirm_password">Confirm New Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+                    <button type="submit">Update Password</button>
+                </form>
+                <br>
+                <button class="expense_button" onclick="window.location.href='logout.php'">Logout</button>
+            </div>
         </div>
-    </div>
 </body>
+
 </html>
