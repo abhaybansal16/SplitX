@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Tutorial</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="addexp.css">
 </head>
+
 <body>
-   <form action="expense.php" method="post" class="form1">
-   <label for="user">User Name:</label>
-    <input id="user" name="user" type="text" placeholder="User Name...">
-    <label for="gpname">Group Name:</label>
-    <input id="gpname" name="gpname" type="text" placeholder="Group Name...">
-    <label for="amount">Amount:</label>
-    <input id="amount" name="amount" type="number" placeholder="Amount...">
-    <button type="submit">Submit</button>   
-</form>
-<?php
+    <form action="expense.php" method="post" class="form1">
+        <label for="user">User Name:</label>
+        <input id="user" name="user" type="text" placeholder="User Name...">
+        <label for="gpname">Group Name:</label>
+        <input id="gpname" name="gpname" type="text" placeholder="Group Name...">
+        <label for="amount">Amount:</label>
+        <input id="amount" name="amount" type="number" placeholder="Amount...">
+        <button type="submit">Submit</button>
+    </form>
+    <?php
 session_start();
    if($_SERVER["REQUEST_METHOD"]=="POST"){
     $User = $_POST['user'];
@@ -61,6 +63,7 @@ session_start();
 }
 }
 ?>
-<a href="dashboard.php">Head to Dashboard</a>
+    <a href="dashboard.php">Head to Dashboard</a>
 </body>
+
 </html>
