@@ -7,7 +7,6 @@ function addGroup($gname, $user_ids,$gid) {
     try {
         $pdo = new PDO($dsn, $dbus, $dbpass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
         $query1 = "INSERT INTO `groups` (group_id,gname) VALUES (:gid,:gname)";
         $stmt1 = $pdo->prepare($query1);
         $stmt1->bindParam(':gname', $gname, PDO::PARAM_STR);
@@ -32,11 +31,14 @@ function addGroup($gname, $user_ids,$gid) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Group</title>
 </head>
+<link rel="stylesheet" href="add.css">
+
 <body>
     <form action="addgc.php" method="POST">
         <label for="gname">Group Name:</label>
@@ -56,11 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gid = $_POST['gid'];
     $user_ids = explode(',', $_POST['user_ids']); // Split the user IDs by commas
 
-    // Call the function to add the group with multiple users
     addGroup($gname, $user_ids,$gid);
 }
 ?>
-<a href="dashboard.php">Head to Dashboard</a>
+    <a href="dashboard.php">Head to Dashboard</a>
 </body>
-</html>
 
+</html>
