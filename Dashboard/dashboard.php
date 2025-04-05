@@ -66,13 +66,13 @@ function toggleWidth() {
             </div>
         </div>
         <div class="body" id="body1">
-          <div class="heading-container">
-            <h1 class="heading">Dashboard</h1>
-            <button class="expense_button" onclick="window.location.href='expense.php'">Add Expense</button>
-            <button class="expense_button" onclick="window.location.href='addgc.php'">Add Group</button>
-          </div>
-          <div>
-          <?php
+            <div class="heading-container">
+                <h1 class="heading">Dashboard</h1>
+                <button class="expense_button" onclick="window.location.href='expense.php'">Add Expense</button>
+                <button class="expense_button" onclick="window.location.href='addgc.php'">Add Group</button>
+            </div>
+            <div>
+                <?php
                 session_start();
                 $dsn = "mysql:host=127.0.0.1:3307;dbname=splitx";
                 $dbus = "root"; 
@@ -83,8 +83,8 @@ function toggleWidth() {
             $loggedInUserId = $_SESSION['user_id'];
             }
             ?>
-          </div>
-          <?php
+            </div>
+            <?php
                   $qOwed = "
                   SELECT SUM(e.amount / (gm.member_count)) AS total_owed
                   FROM expense1 e
@@ -129,7 +129,7 @@ function toggleWidth() {
                   echo "You don't owe anything at the moment.";
               } else if($netOwed>0){
                   // Display the total amount owed
-                    echo "<table border='1'>";
+                    echo "<table border='1' id='group-table'>";
                     echo "<thead>";
                     echo "<tr>";
                     //echo "<th>User ID</th>";
@@ -153,7 +153,7 @@ function toggleWidth() {
               else{
                     $netOwed=$totalPaid-$totalOwed;
                      // Display the total amount owed
-                     echo "<table border='1'>";
+                     echo "<table border='1' id='group-table'>";
                      echo "<thead>";
                      echo "<tr>";
                      echo "<th>Total Owed</th>";
@@ -188,7 +188,7 @@ function toggleWidth() {
                 echo "<p>You are not a member of any groups.</p>";
             } 
             else {
-                echo "<table border='1'>";
+                echo "<table border='1' id='group-table'>";
                 echo "<thead>";
                 echo "<tr>";
                 echo "<th>Group ID</th>";
@@ -208,7 +208,7 @@ function toggleWidth() {
                 echo "</table>";
             }
           ?>
-      </div>
+        </div>
     </div>
 </body>
 
