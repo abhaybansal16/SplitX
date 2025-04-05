@@ -51,14 +51,14 @@ function toggleWidth() {
             </div>
             <br>
             <div class="logos">
-                <div class="logo passive"><span class="material-symbols-outlined">dashboard</span><a href="dashboard.php"
-                        id="text" class="hidden-text ">Dashboard</a></div>
+                <div class="logo passive"><span class="material-symbols-outlined">dashboard</span><a
+                        href="dashboard.php" id="text" class="hidden-text ">Dashboard</a></div>
                 <div class="hbar"></div>
                 <div class="logo passive"><span class="material-symbols-outlined">groups</span><a href="group.php"
                         id="text" class="hidden-text">Group</a></div>
                 <div class="hbar"></div>
-                <div class="logo active_logo"><span class="material-symbols-outlined">vital_signs</span><a
-                        href="#" id="text" class="hidden-text active">Activity</a></div>
+                <div class="logo active_logo"><span class="material-symbols-outlined">vital_signs</span><a href="#"
+                        id="text" class="hidden-text active">Activity</a></div>
                 <div class="hbar"></div>
                 <div class="logo passive"><span class="material-symbols-outlined">settings</span><a href="settings.php"
                         id="text" class="hidden-text">Settings</a></div>
@@ -69,7 +69,7 @@ function toggleWidth() {
             <div class="heading-container">
                 <h1 class="heading">Activity</h1>
             </div>
-                <?php
+            <?php
                     $dsn = "mysql:host=127.0.0.1:3307;dbname=splitx";
                     $dbus = "root"; 
                     $dbpass = "";
@@ -111,6 +111,7 @@ function toggleWidth() {
                         echo "</table>";
                     }
                 ?>
-    </div>
+        </div>
 </body>
-</html>         
+
+</html>
