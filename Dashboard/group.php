@@ -51,8 +51,8 @@ function toggleWidth() {
             </div>
             <br>
             <div class="logos">
-                <div class="logo passive"><span class="material-symbols-outlined">dashboard</span><a href="dashboard.php"
-                        id="text" class="hidden-text active">Dashboard</a></div>
+                <div class="logo passive"><span class="material-symbols-outlined">dashboard</span><a
+                        href="dashboard.php" id="text" class="hidden-text active">Dashboard</a></div>
                 <div class="hbar"></div>
                 <div class="logo active_logo"><span class="material-symbols-outlined">groups</span><a href="group.php"
                         id="text" class="hidden-text active">Group</a></div>
@@ -66,12 +66,12 @@ function toggleWidth() {
             </div>
         </div>
         <div class="body" id="body1">
-          <div class="heading-container">
-            <h1 class="heading">Groups</h1>
-            <button class="expense_button" onclick="window.location.href='addgc.php'">Add Group</button>
-            <button class="expense_button" onclick="window.location.href='addgcmem.php'">Add Group Member</button>
-          </div>
-          <?php
+            <div class="heading-container">
+                <h1 class="heading">Groups</h1>
+                <button class="expense_button" onclick="window.location.href='addgc.php'">Add Group</button>
+                <button class="expense_button" onclick="window.location.href='addgcmem.php'">Add Group Member</button>
+            </div>
+            <?php
                 $dsn="mysql:host=127.0.0.1:3307;dbname=splitx";
                 $dbus="root"; 
                 $dbpass="";
@@ -111,5 +111,5 @@ function toggleWidth() {
                 }
             ?>
 </body>
-</html>
 
+</html>
